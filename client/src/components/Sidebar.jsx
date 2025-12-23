@@ -2,12 +2,13 @@ import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import {
     HomeIcon,
-    MapIcon,
-    BookmarkSquareIcon,
-    ChartBarIcon,
-    UserIcon,
     PlusCircleIcon,
-    ArrowLeftOnRectangleIcon
+    UserCircleIcon,
+    ChartBarIcon,
+    ArrowLeftOnRectangleIcon,
+    GlobeAltIcon,
+    BookmarkIcon,
+    Squares2X2Icon
 } from '@heroicons/react/24/outline';
 
 const Sidebar = ({ currentView, onChangeView, isExpanded, toggleSidebar }) => {
@@ -21,13 +22,13 @@ const Sidebar = ({ currentView, onChangeView, isExpanded, toggleSidebar }) => {
     // Profile -> "profile"
     // New Roadmap -> "form"
 
-    const menuItems = [
-        { id: 'dashboard', label: 'Dashboard', icon: HomeIcon, view: 'dashboard' },
-        { id: 'roadmaps', label: 'Roadmaps', icon: MapIcon, view: 'roadmaps' },
-        { id: 'saved_roadmaps', label: 'Saved Roadmaps', icon: BookmarkSquareIcon, view: 'saved_roadmaps' },
-        { id: 'skills', label: 'Progress', icon: ChartBarIcon, view: 'skills' },
-        { id: 'profile', label: 'Profile', icon: UserIcon, view: 'profile' },
-        { id: 'form', label: 'New Roadmap', icon: PlusCircleIcon, view: 'form' },
+    const navItems = [
+        { id: 'dashboard', label: 'Dashboard', icon: Squares2X2Icon },
+        { id: 'saved_roadmaps', label: 'My Roadmaps', icon: BookmarkIcon },
+        { id: 'templates', label: 'Explore Paths', icon: GlobeAltIcon },
+        { id: 'form', label: 'Create New', icon: PlusCircleIcon },
+        { id: 'skills', label: 'Skills Matrix', icon: ChartBarIcon },
+        { id: 'profile', label: 'My Profile', icon: UserCircleIcon },
     ];
 
     return (

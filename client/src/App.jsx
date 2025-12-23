@@ -13,6 +13,7 @@ import SkillsDashboard from './components/SkillsDashboard';
 import Profile from './components/Profile';
 import DashboardLayout from './components/DashboardLayout';
 import ProgressTracker from './components/ProgressTracker';
+import RoadmapTemplates from './components/RoadmapTemplates';
 import { generateRoadmap, saveRoadmap } from './services/api';
 
 const MainLayout = () => {
@@ -112,10 +113,16 @@ const MainLayout = () => {
   const renderContent = () => {
     switch (view) {
       case 'dashboard':
+        return <RoadmapDashboard onViewRoadmap={handleViewRoadmap} onCreateNew={() => setView('templates')} onlyActive={true} />;
       case 'root':
-      case 'roadmaps':
+        return <RoadmapDashboard onViewRoadmap={handleViewRoadmap} onCreateNew={() => setView('templates')} onlyActive={true} />;
       case 'saved_roadmaps':
-        return <RoadmapDashboard onViewRoadmap={handleViewRoadmap} onCreateNew={() => setView('form')} />;
+        return <RoadmapDashboard onViewRoadmap={handleViewRoadmap} onCreateNew={() => setView('templates')} onlyActive={false} />;
+      case 'templates':
+        return <RoadmapTemplates onTemplateAdded={() => setView('saved_roadmaps')} />;
+      case 'roadmaps':
+        // Legacy redirect
+        return <RoadmapDashboard onViewRoadmap={handleViewRoadmap} onCreateNew={() => setView('templates')} onlyActive={false} />;
       case 'form':
         return <CareerForm onSubmit={handleFormSubmit} isLoading={isLoading} />;
       case 'progress':
