@@ -46,7 +46,7 @@ const RoadmapDashboard = ({ onViewRoadmap, onCreateNew, onlyActive = false }) =>
                     onClick={onCreateNew}
                     className="bg-[var(--color-primary)] text-white px-4 py-2 rounded hover:bg-[var(--secondary)] transition"
                 >
-                    + Explore Templates
+                    + Explore Roadmaps
                 </button>
             </div>
 
