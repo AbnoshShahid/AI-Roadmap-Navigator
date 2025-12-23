@@ -27,16 +27,16 @@ const RoadmapHistory = ({ onView }) => {
 
     return (
         <div className="max-w-4xl mx-auto mt-12">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Previous Roadmaps</h3>
+            <h3 className="text-xl font-bold text-[var(--text-primary)] mb-4">Previous Roadmaps</h3>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {history.map((item) => (
-                    <div key={item._id} className="bg-white p-4 rounded-lg shadow border border-gray-100 hover:shadow-md transition-shadow">
-                        <h4 className="font-semibold text-lg text-blue-600 mb-1">{item.role}</h4>
-                        <p className="text-sm text-gray-500 mb-2">{new Date(item.createdAt).toLocaleDateString()}</p>
-                        <p className="text-xs text-gray-400 truncate mb-4">Skills: {item.skills.join(', ')}</p>
+                    <div key={item._id} className="bg-[var(--bg-surface)] p-4 rounded-lg shadow border border-[var(--border-color)] hover:shadow-md transition-shadow">
+                        <h4 className="font-semibold text-lg text-[var(--secondary)] mb-1">{item.role}</h4>
+                        <p className="text-sm text-[var(--text-muted)] mb-2">{new Date(item.createdAt).toLocaleDateString()}</p>
+                        <p className="text-xs text-[var(--text-muted)] truncate mb-4">Skills: {item.skills.join(', ')}</p>
                         <button
                             onClick={() => onView(item)}
-                            className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded"
+                            className="text-sm bg-[var(--bg-main)] hover:bg-[var(--sidebar-hover)] text-[var(--text-primary)] py-1 px-3 rounded"
                         >
                             View Roadmap
                         </button>

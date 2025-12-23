@@ -3,22 +3,40 @@
 @tailwind utilities;
 
 :root {
-  /* PALETTE (MANDATORY) */
-  --bg-main: #F9DBBD;
-  --bg-surface: #FFFFFF;
+  /* VINTAGE PINK / DUSTY ROSE PALETTE */
+  /* Primary (Deep Wine) */
+  --color-primary: #450920;
+  /* Secondary (Dusty Rose) */
+  --secondary: #8C2F39;
+  /* Accent (Muted Pink) */
+  --accent: #B56576;
 
-  --primary: #DA627D;
-  --primary-hover: #A53860;
+  /* Backgrounds */
+  --bg-main: #E8C2CA;
+  --bg-surface: #F2D7DD;
 
-  --secondary: #FFA5AB;
-  --accent: #E84D88;
+  /* Text */
+  --text-primary: #2B0A12;
+  --text-muted: #6E2C3A;
+  --text-light: #F2D7DD;
 
-  --text-primary: #450920;
-  --text-muted: #A53860;
+  /* Borders */
+  --border-color: #C98B98;
 
-  --sidebar-bg: #FFA5AB;
-  --sidebar-active: #DA627D;
-  --sidebar-hover: #F9DBBD;
+  /* Component Specific Mappings */
+  --sidebar-bg: var(--secondary);
+  --sidebar-active: var(--color-primary);
+  --sidebar-hover: var(--accent);
+  --sidebar-text: #F2D7DD;
+  /* Light text for dark sidebar */
+  --sidebar-text-active: #F2D7DD;
+  --sidebar-active-bg: var(--color-primary);
+
+  --topbar-bg: var(--bg-surface);
+  --topbar-border: var(--border-color);
+
+  --color-emphasis: #B56576;
+  /* Used for hover states etc */
 }
 
 body {

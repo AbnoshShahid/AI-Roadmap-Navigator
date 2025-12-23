@@ -58,12 +58,12 @@ const Sidebar = ({ currentView, onChangeView }) => {
                             onClick={() => onChangeView(targetView)}
                             className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group
                                 ${isActive
-                                    ? 'bg-[var(--sidebar-active)] text-white font-bold shadow-md transform scale-[1.02]'
+                                    ? 'bg-[var(--sidebar-active)] text-[var(--sidebar-text-active)] font-bold shadow-md transform scale-[1.02]'
                                     : 'text-[var(--text-primary)] hover:bg-[var(--sidebar-hover)] hover:text-[var(--text-primary)] hover:translate-x-1'
                                 }`}
                         >
                             <item.icon
-                                className={`w-5 h-5 transition-transform duration-200 ${isActive ? 'text-sidebar-active scale-110' : 'text-gray-500 group-hover:text-blue-500'}`}
+                                className={`w-5 h-5 transition-transform duration-200 ${isActive ? 'text-[var(--sidebar-text-active)] scale-110' : 'text-[var(--text-muted)] group-hover:text-[var(--text-primary)]'}`}
                                 strokeWidth={isActive ? 2.5 : 2}
                             />
                             <span className="tracking-wide">{item.label}</span>
@@ -76,7 +76,7 @@ const Sidebar = ({ currentView, onChangeView }) => {
             <div className="p-6 border-t border-gray-200/10">
                 <button
                     onClick={logout}
-                    className="w-full flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-xl transition-all duration-200 group"
+                    className="w-full flex items-center space-x-3 px-4 py-3 text-[var(--text-primary)] hover:bg-[var(--sidebar-hover)] rounded-xl transition-all duration-200 group"
                 >
                     <ArrowLeftOnRectangleIcon className="w-5 h-5 group-hover:scale-110 transition-transform" />
                     <span className="font-semibold">Log out</span>

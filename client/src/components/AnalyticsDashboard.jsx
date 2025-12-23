@@ -30,33 +30,33 @@ const AnalyticsDashboard = ({ roadmapId, API_URL }) => {
 
     const getStatusColor = (status) => {
         switch (status) {
-            case 'On Track': return 'bg-green-100 text-green-800';
-            case 'Stalled': return 'bg-red-100 text-red-800';
-            case 'Needs Attention': return 'bg-yellow-100 text-yellow-800';
-            default: return 'bg-gray-100 text-gray-800';
+            case 'On Track': return 'bg-[var(--color-primary)]/10 text-[var(--color-primary)]';
+            case 'Stalled': return 'bg-[var(--accent)]/10 text-[var(--accent)]';
+            case 'Needs Attention': return 'bg-[var(--secondary)]/10 text-[var(--secondary)]';
+            default: return 'bg-[var(--bg-main)] text-[var(--text-muted)]';
         }
     };
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-md animate-fade-in mt-6">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">📊 Learning Analytics</h3>
+        <div className="bg-[var(--bg-surface)] p-6 rounded-lg shadow-md animate-fade-in mt-6">
+            <h3 className="text-xl font-bold text-[var(--text-primary)] mb-4">📊 Learning Analytics</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
-                    <p className="text-gray-500 text-xs font-semibold uppercase">Completion Rate</p>
-                    <p className="text-3xl font-bold text-blue-600">{stats.completionRate}%</p>
+                <div className="bg-[var(--bg-main)] p-4 rounded-lg border border-[var(--border-color)] text-center">
+                    <p className="text-[var(--text-muted)] text-xs font-semibold uppercase">Completion Rate</p>
+                    <p className="text-3xl font-bold text-[var(--secondary)]">{stats.completionRate}%</p>
                 </div>
 
-                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
-                    <p className="text-gray-500 text-xs font-semibold uppercase">Status</p>
+                <div className="bg-[var(--bg-main)] p-4 rounded-lg border border-[var(--border-color)] text-center">
+                    <p className="text-[var(--text-muted)] text-xs font-semibold uppercase">Status</p>
                     <span className={`inline-block mt-1 px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(stats.status)}`}>
                         {stats.status}
                     </span>
                 </div>
 
-                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
-                    <p className="text-gray-500 text-xs font-semibold uppercase">Skills Mastered</p>
-                    <p className="text-3xl font-bold text-gray-800">{stats.completedSkillsCount}</p>
+                <div className="bg-[var(--bg-main)] p-4 rounded-lg border border-[var(--border-color)] text-center">
+                    <p className="text-[var(--text-muted)] text-xs font-semibold uppercase">Skills Mastered</p>
+                    <p className="text-3xl font-bold text-[var(--text-primary)]">{stats.completedSkillsCount}</p>
                 </div>
             </div>
 

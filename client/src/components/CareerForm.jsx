@@ -20,11 +20,11 @@ const CareerForm = ({ onSubmit, isLoading }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Create Your Career Roadmap</h2>
+        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-6 bg-[var(--bg-surface)] rounded-lg shadow-md space-y-6 border border-[var(--border-color)]">
+            <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-4">Create Your Career Roadmap</h2>
 
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Target Career Role</label>
+                <label className="block text-sm font-medium text-[var(--text-muted)] mb-1">Target Career Role</label>
                 <input
                     type="text"
                     name="role"
@@ -32,18 +32,18 @@ const CareerForm = ({ onSubmit, isLoading }) => {
                     onChange={handleChange}
                     required
                     placeholder="e.g. Full Stack Developer"
-                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full p-2 border border-[var(--border-color)] rounded-md focus:ring-2 focus:ring-[var(--accent)] outline-none bg-[var(--bg-main)] text-[var(--text-primary)]"
                 />
             </div>
 
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Education Level</label>
+                <label className="block text-sm font-medium text-[var(--text-muted)] mb-1">Education Level</label>
                 <select
                     name="education"
                     value={formData.education}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full p-2 border border-[var(--border-color)] rounded-md focus:ring-2 focus:ring-[var(--accent)] outline-none bg-[var(--bg-main)] text-[var(--text-primary)]"
                 >
                     <option value="">Select Education</option>
                     <option value="High School">High School</option>
@@ -54,32 +54,32 @@ const CareerForm = ({ onSubmit, isLoading }) => {
             </div>
 
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Current Skills (comma separated)</label>
+                <label className="block text-sm font-medium text-[var(--text-muted)] mb-1">Current Skills (comma separated)</label>
                 <textarea
                     name="skills"
                     value={formData.skills}
                     onChange={handleChange}
                     placeholder="e.g. JavaScript, HTML, Python"
-                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none h-24"
+                    className="w-full p-2 border border-[var(--border-color)] rounded-md focus:ring-2 focus:ring-[var(--accent)] outline-none h-24 bg-[var(--bg-main)] text-[var(--text-primary)]"
                 />
             </div>
 
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Interests</label>
+                <label className="block text-sm font-medium text-[var(--text-muted)] mb-1">Interests</label>
                 <input
                     type="text"
                     name="interests"
                     value={formData.interests}
                     onChange={handleChange}
                     placeholder="e.g. AI, Web Design, Data Security"
-                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full p-2 border border-[var(--border-color)] rounded-md focus:ring-2 focus:ring-[var(--accent)] outline-none bg-[var(--bg-main)] text-[var(--text-primary)]"
                 />
             </div>
 
             <button
                 type="submit"
                 disabled={isLoading}
-                className={`w-full py-3 px-4 rounded-md text-white font-medium transition-colors ${isLoading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+                className={`w-full py-3 px-4 rounded-md text-[var(--text-light)] font-medium transition-colors ${isLoading ? 'bg-[var(--accent)] cursor-not-allowed' : 'bg-[var(--color-primary)] hover:bg-[var(--secondary)]'
                     }`}
             >
                 {isLoading ? 'Generating Roadmap...' : 'Generate Roadmap'}

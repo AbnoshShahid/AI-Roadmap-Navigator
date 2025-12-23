@@ -34,21 +34,21 @@ const RoadmapDashboard = ({ onViewRoadmap, onCreateNew }) => {
     return (
         <div className="max-w-6xl mx-auto p-4 animate-fade-in">
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold text-gray-800">Student Dashboard 🎓</h1>
+                <h1 className="text-3xl font-bold text-[var(--text-primary)]">Student Dashboard 🎓</h1>
                 <button
                     onClick={onCreateNew}
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                    className="bg-[var(--color-primary)] text-white px-4 py-2 rounded hover:bg-[var(--secondary)] transition"
                 >
                     + Create New Roadmap
                 </button>
             </div>
 
             {roadmaps.length === 0 ? (
-                <div className="text-center py-20 bg-white rounded-lg shadow-sm border border-gray-100">
-                    <p className="text-gray-500 text-lg mb-4">No roadmaps saved yet.</p>
+                <div className="text-center py-20 bg-[var(--bg-surface)] rounded-lg shadow-sm border border-[var(--border-color)]">
+                    <p className="text-[var(--text-muted)] text-lg mb-4">No roadmaps saved yet.</p>
                     <button
                         onClick={onCreateNew}
-                        className="text-blue-600 hover:underline"
+                        className="text-[var(--secondary)] hover:underline"
                     >
                         Start your first career path
                     </button>
@@ -63,11 +63,11 @@ const RoadmapDashboard = ({ onViewRoadmap, onCreateNew }) => {
                         const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
                         return (
-                            <div key={roadmap._id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition border border-gray-100 flex flex-col">
+                            <div key={roadmap._id} className="bg-[var(--bg-surface)] rounded-xl shadow-md overflow-hidden hover:shadow-lg transition border border-[var(--border-color)] flex flex-col">
                                 <div className="p-6 flex-1">
                                     <div className="flex justify-between items-start mb-2">
-                                        <h3 className="text-xl font-bold text-gray-900 line-clamp-2">{roadmap.role}</h3>
-                                        <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full whitespace-nowrap">
+                                        <h3 className="text-xl font-bold text-[var(--text-primary)] line-clamp-2">{roadmap.role}</h3>
+                                        <span className="bg-[var(--secondary)]/10 text-[var(--secondary)] text-xs px-2 py-1 rounded-full whitespace-nowrap">
                                             {roadmap.education}
                                         </span>
                                     </div>
@@ -77,17 +77,17 @@ const RoadmapDashboard = ({ onViewRoadmap, onCreateNew }) => {
 
                                     {/* Progress Bar */}
                                     <div className="mb-4">
-                                        <div className="flex justify-between text-xs font-semibold mb-1 text-gray-600">
+                                        <div className="flex justify-between text-xs font-semibold mb-1 text-[var(--text-muted)]">
                                             <span>Progress</span>
                                             <span>{percentage}%</span>
                                         </div>
-                                        <div className="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div className="w-full bg-[var(--bg-main)] rounded-full h-2.5">
                                             <div
-                                                className="bg-green-500 h-2.5 rounded-full transition-all duration-500"
+                                                className="bg-[var(--color-primary)] h-2.5 rounded-full transition-all duration-500"
                                                 style={{ width: `${percentage}%` }}
                                             ></div>
                                         </div>
-                                        <p className="text-xs text-gray-400 mt-1">
+                                        <p className="text-xs text-[var(--text-muted)] mt-1">
                                             {completed} skills completed
                                         </p>
                                     </div>
@@ -102,10 +102,10 @@ const RoadmapDashboard = ({ onViewRoadmap, onCreateNew }) => {
                                     </div>
                                 </div>
 
-                                <div className="p-4 bg-gray-50 border-t border-gray-100">
+                                <div className="p-4 bg-[var(--bg-main)]/50 border-t border-[var(--border-color)]">
                                     <button
                                         onClick={() => onViewRoadmap(roadmap)}
-                                        className="w-full py-2 bg-white border border-gray-300 rounded text-gray-700 font-medium hover:bg-gray-100 transition"
+                                        className="w-full py-2 bg-[var(--bg-surface)] border border-[var(--border-color)] rounded text-[var(--text-primary)] font-medium hover:bg-[var(--sidebar-hover)] transition"
                                     >
                                         View & Track Progress →
                                     </button>

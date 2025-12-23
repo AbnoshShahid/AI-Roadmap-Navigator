@@ -40,13 +40,13 @@ const Register = ({ onSwitchToLogin }) => {
         <div
             className="flex items-center justify-center min-h-screen"
             style={{
-                background: 'linear-gradient(135deg, #E84D88, #DA627D, #A53860, #450920)'
+                background: 'linear-gradient(135deg, var(--bg-main), var(--accent), var(--secondary), var(--color-primary))'
             }}
         >
-            <div className="w-full max-w-md p-8 space-y-8 bg-white rounded shadow-md">
+            <div className="w-full max-w-md p-8 space-y-8 bg-[var(--bg-surface)] rounded shadow-md border border-[var(--border-color)]">
                 <div className="text-center">
-                    <h2 className="text-3xl font-extrabold text-gray-900">Create Account</h2>
-                    <p className="mt-2 text-sm text-gray-600">
+                    <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">Create Account</h2>
+                    <p className="mt-2 text-sm text-[var(--text-muted)]">
                         Join to track your career journey
                     </p>
                 </div>
@@ -57,7 +57,7 @@ const Register = ({ onSwitchToLogin }) => {
                                 name="name"
                                 type="text"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-[var(--border-color)] placeholder-[var(--text-muted)] text-[var(--text-primary)] rounded-t-md focus:outline-none focus:ring-[var(--accent)] focus:border-[var(--accent)] focus:z-10 sm:text-sm bg-[var(--bg-main)]"
                                 placeholder="Full Name"
                                 value={formData.name}
                                 onChange={handleChange}
@@ -68,7 +68,7 @@ const Register = ({ onSwitchToLogin }) => {
                                 name="email"
                                 type="email"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-[var(--border-color)] placeholder-[var(--text-muted)] text-[var(--text-primary)] focus:outline-none focus:ring-[var(--accent)] focus:border-[var(--accent)] focus:z-10 sm:text-sm bg-[var(--bg-main)]"
                                 placeholder="Email address"
                                 value={formData.email}
                                 onChange={handleChange}
@@ -79,7 +79,7 @@ const Register = ({ onSwitchToLogin }) => {
                                 name="password"
                                 type="password"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-[var(--border-color)] placeholder-[var(--text-muted)] text-[var(--text-primary)] focus:outline-none focus:ring-[var(--accent)] focus:border-[var(--accent)] focus:z-10 sm:text-sm bg-[var(--bg-main)]"
                                 placeholder="Password"
                                 value={formData.password}
                                 onChange={handleChange}
@@ -90,7 +90,7 @@ const Register = ({ onSwitchToLogin }) => {
                                 name="confirmPassword"
                                 type="password"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-[var(--border-color)] placeholder-[var(--text-muted)] text-[var(--text-primary)] rounded-b-md focus:outline-none focus:ring-[var(--accent)] focus:border-[var(--accent)] focus:z-10 sm:text-sm bg-[var(--bg-main)]"
                                 placeholder="Confirm Password"
                                 value={formData.confirmPassword}
                                 onChange={handleChange}
@@ -102,17 +102,17 @@ const Register = ({ onSwitchToLogin }) => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:opacity-90"
-                            style={{ backgroundColor: 'var(--primary)' }}
+                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-[var(--text-light)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent)] hover:opacity-90"
+                            style={{ backgroundColor: 'var(--color-primary)' }}
                         >
                             {loading ? 'Creating...' : 'Register'}
                         </button>
                     </div>
                 </form>
                 <div className="text-center">
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-[var(--text-muted)]">
                         Already have an account?{' '}
-                        <button onClick={onSwitchToLogin} className="font-medium text-blue-600 hover:text-blue-500">
+                        <button onClick={onSwitchToLogin} className="font-medium text-[var(--secondary)] hover:text-[var(--accent)]">
                             Sign in
                         </button>
                     </p>

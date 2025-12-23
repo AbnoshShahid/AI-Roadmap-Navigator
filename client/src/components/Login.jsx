@@ -53,13 +53,13 @@ const Login = ({ onSwitchToRegister }) => {
         <div
             className="flex items-center justify-center min-h-screen"
             style={{
-                background: 'linear-gradient(135deg, #E84D88, #DA627D, #A53860, #450920)'
+                background: 'linear-gradient(135deg, var(--bg-main), var(--accent), var(--secondary), var(--color-primary))'
             }}
         >
-            <div className="w-full max-w-md p-8 space-y-8 bg-white rounded shadow-md">
+            <div className="w-full max-w-md p-8 space-y-8 bg-[var(--bg-surface)] rounded shadow-md border border-[var(--border-color)]">
                 <div className="text-center">
-                    <h2 className="text-3xl font-extrabold text-gray-900">Sign in</h2>
-                    <p className="mt-2 text-sm text-gray-600">
+                    <h2 className="text-3xl font-extrabold text-[var(--text-primary)]">Sign in</h2>
+                    <p className="mt-2 text-sm text-[var(--text-muted)]">
                         Access your roadmaps
                     </p>
                 </div>
@@ -70,7 +70,7 @@ const Login = ({ onSwitchToRegister }) => {
                                 name="email"
                                 type="email"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-[var(--border-color)] placeholder-[var(--text-muted)] text-[var(--text-primary)] rounded-t-md focus:outline-none focus:ring-[var(--accent)] focus:border-[var(--accent)] focus:z-10 sm:text-sm bg-[var(--bg-main)]"
                                 placeholder="Email address"
                                 value={formData.email}
                                 onChange={handleChange}
@@ -81,7 +81,7 @@ const Login = ({ onSwitchToRegister }) => {
                                 name="password"
                                 type="password"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-[var(--border-color)] placeholder-[var(--text-muted)] text-[var(--text-primary)] rounded-b-md focus:outline-none focus:ring-[var(--accent)] focus:border-[var(--accent)] focus:z-10 sm:text-sm bg-[var(--bg-main)]"
                                 placeholder="Password"
                                 value={formData.password}
                                 onChange={handleChange}
@@ -93,17 +93,17 @@ const Login = ({ onSwitchToRegister }) => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${loading ? 'opacity-75 cursor-not-allowed' : 'hover:opacity-90'}`}
-                            style={{ backgroundColor: 'var(--primary)' }}
+                            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-[var(--text-light)] ${loading ? 'opacity-75 cursor-not-allowed' : 'hover:opacity-90'}`}
+                            style={{ backgroundColor: 'var(--color-primary)' }}
                         >
                             {loading ? 'Signing in...' : 'Sign in'}
                         </button>
                     </div>
                 </form>
                 <div className="text-center">
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-[var(--text-muted)]">
                         Don't have an account?{' '}
-                        <button type="button" onClick={onSwitchToRegister} className="font-medium text-blue-600 hover:text-blue-500">
+                        <button type="button" onClick={onSwitchToRegister} className="font-medium text-[var(--secondary)] hover:text-[var(--accent)]">
                             Register
                         </button>
                     </p>

@@ -36,16 +36,16 @@ const RoadmapResult = ({ roadmap, analysis, onReset, onSave }) => {
         <div className="max-w-5xl mx-auto space-y-8 animate-fade-in">
 
             {/* BLOCK 1: User Input Summary */}
-            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-indigo-500">
-                <h2 className="text-xl font-bold text-gray-800 mb-4">👤 User Profile Summary</h2>
+            <div className="bg-[var(--bg-surface)] p-6 rounded-lg shadow-md border-l-4 border-[var(--secondary)]">
+                <h2 className="text-xl font-bold text-[var(--text-primary)] mb-4">👤 User Profile Summary</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <span className="text-xs text-gray-500 uppercase tracking-wide">Target Role</span>
-                        <p className="font-semibold text-indigo-700">{userSummary.role}</p>
+                        <span className="text-xs text-[var(--text-muted)] uppercase tracking-wide">Target Role</span>
+                        <p className="font-semibold text-[var(--color-primary)]">{userSummary.role}</p>
                     </div>
                     <div>
-                        <span className="text-xs text-gray-500 uppercase tracking-wide">Education</span>
-                        <p className="font-medium text-gray-700">{userSummary.education}</p>
+                        <span className="text-xs text-[var(--text-muted)] uppercase tracking-wide">Education</span>
+                        <p className="font-medium text-[var(--text-primary)]">{userSummary.education}</p>
                     </div>
                     <div>
                         <span className="text-xs text-gray-500 uppercase tracking-wide">Current Skills</span>
@@ -59,9 +59,9 @@ const RoadmapResult = ({ roadmap, analysis, onReset, onSave }) => {
             </div>
 
             {/* BLOCK 2: AI Job Suggestions */}
-            <div className="bg-gradient-to-r from-purple-50 to-indigo-50 p-6 rounded-lg shadow-md border border-purple-100">
+            <div className="bg-gradient-to-r from-[var(--bg-main)] to-[var(--bg-surface)] p-6 rounded-lg shadow-md border border-[var(--border-color)]">
                 <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-xl font-bold text-purple-800">🤖 AI Career Suggestions</h2>
+                    <h2 className="text-xl font-bold text-[var(--secondary)]">🤖 AI Career Suggestions</h2>
                     {analysis?.mlRecommendations?.[0]?.meta && (
                         <span className="text-xs bg-purple-200 text-purple-800 px-2 py-1 rounded font-mono">
                             ML Model: {analysis.mlRecommendations[0].meta.model_version}
@@ -71,9 +71,9 @@ const RoadmapResult = ({ roadmap, analysis, onReset, onSave }) => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {jobSuggestions.map((job, idx) => (
-                        <div key={idx} className="bg-white p-4 rounded border border-purple-200 shadow-sm hover:shadow-md transition-shadow">
-                            <h3 className="font-bold text-purple-900">{job.title}</h3>
-                            <p className="text-sm text-gray-600 mt-1">{job.description}</p>
+                        <div key={idx} className="bg-[var(--bg-surface)] p-4 rounded border border-[var(--border-color)] shadow-sm hover:shadow-md transition-shadow">
+                            <h3 className="font-bold text-[var(--color-primary)]">{job.title}</h3>
+                            <p className="text-sm text-[var(--text-muted)] mt-1">{job.description}</p>
                         </div>
                     ))}
                     {/* Fallback for pure ML service recommendations if Groq list is empty */}
@@ -87,20 +87,20 @@ const RoadmapResult = ({ roadmap, analysis, onReset, onSave }) => {
             </div>
 
             {/* BLOCK 3: Skill Gap Analysis */}
-            <div className="bg-red-50 p-6 rounded-lg shadow-md border-l-4 border-red-400">
-                <h2 className="text-xl font-bold text-red-800 mb-4">📊 Skills Gap Analysis</h2>
+            <div className="bg-[var(--bg-main)] p-6 rounded-lg shadow-md border-l-4 border-[var(--accent)]">
+                <h2 className="text-xl font-bold text-[var(--accent)] mb-4">📊 Skills Gap Analysis</h2>
                 <div className="flex flex-wrap gap-6 mb-4">
-                    <div className="bg-white px-4 py-2 rounded shadow-sm">
-                        <span className="block text-xs text-gray-500">Required Skills</span>
-                        <span className="text-xl font-bold text-gray-800">{skillsAnalysis.requiredSkills?.length || 0}</span>
+                    <div className="bg-[var(--bg-surface)] px-4 py-2 rounded shadow-sm">
+                        <span className="block text-xs text-[var(--text-muted)]">Required Skills</span>
+                        <span className="text-xl font-bold text-[var(--text-primary)]">{skillsAnalysis.requiredSkills?.length || 0}</span>
                     </div>
-                    <div className="bg-white px-4 py-2 rounded shadow-sm">
-                        <span className="block text-xs text-gray-500">You Have</span>
-                        <span className="text-xl font-bold text-green-600">{skillsAnalysis.existingSkills?.length || 0}</span>
+                    <div className="bg-[var(--bg-surface)] px-4 py-2 rounded shadow-sm">
+                        <span className="block text-xs text-[var(--text-muted)]">You Have</span>
+                        <span className="text-xl font-bold text-[var(--color-primary)]">{skillsAnalysis.existingSkills?.length || 0}</span>
                     </div>
-                    <div className="bg-white px-4 py-2 rounded shadow-sm">
-                        <span className="block text-xs text-gray-500">Missing</span>
-                        <span className="text-xl font-bold text-red-600">{skillsAnalysis.missingSkills?.length || 0}</span>
+                    <div className="bg-[var(--bg-surface)] px-4 py-2 rounded shadow-sm">
+                        <span className="block text-xs text-[var(--text-muted)]">Missing</span>
+                        <span className="text-xl font-bold text-[var(--accent)]">{skillsAnalysis.missingSkills?.length || 0}</span>
                     </div>
                     {skillsAnalysis.matchPercentage !== undefined && (
                         <div className="bg-white px-4 py-2 rounded shadow-sm">
@@ -112,7 +112,7 @@ const RoadmapResult = ({ roadmap, analysis, onReset, onSave }) => {
 
                 {skillsAnalysis.missingSkills?.length > 0 && (
                     <div>
-                        <p className="text-sm font-semibold text-red-700 mb-2">Recommended to Learn:</p>
+                        <p className="text-sm font-semibold text-[var(--text-muted)] mb-2">Recommended to Learn:</p>
                         <div className="flex flex-wrap gap-2">
                             {skillsAnalysis.missingSkills.map((skill, idx) => (
                                 <span key={idx} className="px-2 py-1 bg-red-100 text-red-800 text-xs rounded border border-red-200">
@@ -125,9 +125,9 @@ const RoadmapResult = ({ roadmap, analysis, onReset, onSave }) => {
             </div>
 
             {/* BLOCK 4: Time-Based Roadmap */}
-            <div className="bg-white p-6 rounded-lg shadow-lg border-t-4 border-green-500">
+            <div className="bg-[var(--bg-surface)] p-6 rounded-lg shadow-lg border-t-4 border-[var(--color-primary)]">
                 <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-2xl font-bold text-gray-800">Your Personalized Roadmap</h2>
+                    <h2 className="text-2xl font-bold text-[var(--text-primary)]">Your Personalized Roadmap</h2>
                     <div className="space-x-3">
                         <button
                             onClick={() => {
@@ -140,7 +140,7 @@ const RoadmapResult = ({ roadmap, analysis, onReset, onSave }) => {
                                 };
                                 onSave(payload);
                             }}
-                            className="text-sm bg-green-600 text-white hover:bg-green-700 py-2 px-4 rounded transition-colors"
+                            className="text-sm bg-[var(--color-primary)] text-white hover:bg-[var(--secondary)] py-2 px-4 rounded transition-colors"
                         >
                             Save Roadmap
                         </button>
@@ -155,16 +155,16 @@ const RoadmapResult = ({ roadmap, analysis, onReset, onSave }) => {
 
                 <div className="space-y-6">
                     {phases.map((phase, idx) => (
-                        <div key={idx} className="relative pl-8 border-l-2 border-green-200 pb-2">
-                            <div className="absolute -left-2 top-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-sm"></div>
-                            <h3 className="text-lg font-bold text-gray-900 mb-2">{phase.phase}</h3>
-                            <p className="text-sm text-gray-600 italic mb-3">{phase.focus || phase.goals}</p>
+                        <div key={idx} className="relative pl-8 border-l-2 border-[var(--border-color)] pb-2">
+                            <div className="absolute -left-2 top-0 w-4 h-4 bg-[var(--color-primary)] rounded-full border-2 border-white shadow-sm"></div>
+                            <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{phase.phase}</h3>
+                            <p className="text-sm text-[var(--text-muted)] italic mb-3">{phase.focus || phase.goals}</p>
 
                             <div className="mb-3">
-                                <span className="text-xs font-bold text-gray-500 uppercase">Focus Skills:</span>
+                                <span className="text-xs font-bold text-[var(--text-muted)] uppercase">Focus Skills:</span>
                                 <div className="flex flex-wrap gap-2 mt-1">
                                     {phase.skills.map((s, i) => (
-                                        <span key={i} className="px-2 py-1 bg-green-50 text-green-700 text-xs rounded border border-green-100">
+                                        <span key={i} className="px-2 py-1 bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-xs rounded border border-[var(--color-primary)]/20">
                                             {s}
                                         </span>
                                     ))}

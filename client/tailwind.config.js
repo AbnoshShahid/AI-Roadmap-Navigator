@@ -9,7 +9,6 @@ export default {
             bg: 'var(--sidebar-bg)',
             text: 'var(--sidebar-text)',
             active: 'var(--sidebar-text-active)',
-            // Map 'active-bg' to a utility if needed, or just use 'primary'
             activeBg: 'var(--sidebar-active-bg)',
             hover: 'var(--sidebar-hover)',
         },
@@ -17,10 +16,23 @@ export default {
             bg: 'var(--topbar-bg)',
             border: 'var(--topbar-border)',
         },
-        // Add primary/accent utilities
         primary: {
             DEFAULT: 'var(--color-primary)',
             hover: 'var(--color-emphasis)',
+        },
+        secondary: {
+            DEFAULT: 'var(--secondary)',
+        },
+        accent: {
+            DEFAULT: 'var(--accent)',
+        },
+        surface: {
+            DEFAULT: 'var(--bg-surface)',
+        },
+        theme: {
+            border: 'var(--border-color)',
+            text: 'var(--text-primary)',
+            muted: 'var(--text-muted)',
         }
     },
     plugins: [],
