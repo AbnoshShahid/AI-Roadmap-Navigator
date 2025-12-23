@@ -18,7 +18,7 @@ const RoadmapDashboard = ({ onViewRoadmap, onCreateNew, onlyActive = false }) =>
     const fetchRoadmaps = async () => {
         try {
             const data = await getAllRoadmaps();
-            setRoadmaps(data);
+            setRoadmaps(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error(error);
             // Don't show error if it's just an auth issue (user will be redirected)
@@ -62,7 +62,7 @@ const RoadmapDashboard = ({ onViewRoadmap, onCreateNew, onlyActive = false }) =>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {roadmaps
+                    {(roadmaps || [])
                         .filter(r => {
                             if (!onlyActive) return true;
                             // For dashboard, show if progress > 0 and < 100, or recently created
@@ -90,8 +90,8 @@ const RoadmapDashboard = ({ onViewRoadmap, onCreateNew, onlyActive = false }) =>
                                             <button
                                                 onClick={() => onViewRoadmap(roadmap)}
                                                 className={`w-full text-center py-2 rounded transition border ${onlyActive
-                                                        ? 'bg-[var(--color-primary)] text-white hover:bg-[var(--secondary)] font-bold shadow-md'
-                                                        : 'text-[var(--color-primary)] border-[var(--color-primary)] hover:bg-[var(--bg-main)]'
+                                                    ? 'bg-[var(--color-primary)] text-white hover:bg-[var(--secondary)] font-bold shadow-md'
+                                                    : 'text-[var(--color-primary)] border-[var(--color-primary)] hover:bg-[var(--bg-main)]'
                                                     }`}
                                             >
                                                 {onlyActive ? 'Continue Learning' : 'View Details'}
