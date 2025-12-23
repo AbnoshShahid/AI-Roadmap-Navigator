@@ -37,7 +37,7 @@ The system uses a Hybrid Intelligence approach, meaning it combines multiple AI 
 - Uses AI to generate step-by-step learning roadmaps
 - Roadmaps are customized based on:
   - User skills
-  - Career goals
+  - Career goals.
   - Skill gaps
 
 ### Adaptive Feedback
