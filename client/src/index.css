@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* PALETTE (MANDATORY) */
+  --bg-main: #F9DBBD;
+  --bg-surface: #FFFFFF;
+
+  --primary: #DA627D;
+  --primary-hover: #A53860;
+
+  --secondary: #FFA5AB;
+  --accent: #E84D88;
+
+  --text-primary: #450920;
+  --text-muted: #A53860;
+
+  --sidebar-bg: #FFA5AB;
+  --sidebar-active: #DA627D;
+  --sidebar-hover: #F9DBBD;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+}
