@@ -78,9 +78,9 @@ const RoadmapResult = ({ roadmap, analysis, onReset, onSave }) => {
                     ))}
                     {/* Fallback for pure ML service recommendations if Groq list is empty */}
                     {!jobSuggestions.length && analysis?.mlRecommendations?.map((rec, idx) => (
-                        <div key={'ml-' + idx} className="bg-white p-4 rounded border border-purple-200">
-                            <h3 className="font-bold text-purple-900">{rec.role}</h3>
-                            <p className="text-sm text-gray-500">{(rec.confidence * 100).toFixed(0)}% Match Confidence</p>
+                        <div key={'ml-' + idx} className="bg-[var(--bg-surface)] p-4 rounded border border-[var(--border-color)]">
+                            <h3 className="font-bold text-[var(--color-primary)]">{rec.role}</h3>
+                            <p className="text-sm text-[var(--text-muted)]">{(rec.confidence * 100).toFixed(0)}% Match Confidence</p>
                         </div>
                     ))}
                 </div>
@@ -103,9 +103,9 @@ const RoadmapResult = ({ roadmap, analysis, onReset, onSave }) => {
                         <span className="text-xl font-bold text-[var(--accent)]">{skillsAnalysis.missingSkills?.length || 0}</span>
                     </div>
                     {skillsAnalysis.matchPercentage !== undefined && (
-                        <div className="bg-white px-4 py-2 rounded shadow-sm">
-                            <span className="block text-xs text-gray-500">Match Score</span>
-                            <span className="text-xl font-bold text-blue-600">{skillsAnalysis.matchPercentage}%</span>
+                        <div className="bg-[var(--bg-surface)] px-4 py-2 rounded shadow-sm">
+                            <span className="block text-xs text-[var(--text-muted)]">Match Score</span>
+                            <span className="text-xl font-bold text-[var(--secondary)]">{skillsAnalysis.matchPercentage}%</span>
                         </div>
                     )}
                 </div>

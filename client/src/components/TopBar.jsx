@@ -28,7 +28,7 @@ const TopBar = ({ title = "Dashboard", user }) => {
                     <input
                         type="text"
                         placeholder="Search..."
-                        className="pl-10 pr-4 py-2 border border-[var(--border-color)] rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)] w-64 bg-[var(--bg-main)] text-[var(--text-primary)] placeholder-[var(--text-muted)]"
+                        className="pl-10 pr-4 py-2 border border-[var(--border-color)] rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)] w-64 bg-[var(--bg-surface)] text-[var(--text-muted)] placeholder-[var(--text-muted)]"
                     />
                 </div>
 

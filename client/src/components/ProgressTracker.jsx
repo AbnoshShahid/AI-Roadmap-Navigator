@@ -81,7 +81,7 @@ const ProgressTracker = ({ roadmap, onBack }) => {
                 ← Back to Dashboard
             </button>
 
-            <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-8 mb-8">
+            <div className="bg-[var(--bg-surface)] rounded-xl shadow-lg border border-[var(--border-color)] p-8 mb-8">
                 <div className="flex justify-between items-start mb-6">
                     <div>
                         <h1 className="text-3xl font-bold text-gray-900 mb-2">{roadmap.role}</h1>
@@ -115,10 +115,10 @@ const ProgressTracker = ({ roadmap, onBack }) => {
                                         className={`flex items-center gap-3 p-3 rounded-lg border transition cursor-pointer select-none
                                             ${skill.completed
                                                 ? 'bg-blue-50 border-blue-200'
-                                                : 'bg-white border-gray-200 hover:border-blue-300'}`}
+                                                : 'bg-[var(--bg-surface)] border-[var(--border-color)] hover:border-[var(--accent)]'}`}
                                     >
                                         <div className={`w-5 h-5 rounded border flex items-center justify-center transition
-                                            ${skill.completed ? 'bg-blue-600 border-blue-600' : 'bg-white border-gray-300'}`}>
+                                            ${skill.completed ? 'bg-[var(--color-primary)] border-[var(--color-primary)]' : 'bg-[var(--bg-surface)] border-[var(--border-color)]'}`}>
                                             {skill.completed && (
                                                 <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
@@ -141,7 +141,7 @@ const ProgressTracker = ({ roadmap, onBack }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
