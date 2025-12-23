@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
-const Login = ({ onSwitchToRegister }) => {
+const Login = () => {
     const { login } = useAuth();
     const [formData, setFormData] = useState({
         email: '',
@@ -103,9 +104,9 @@ const Login = ({ onSwitchToRegister }) => {
                 <div className="text-center">
                     <p className="text-sm text-[var(--text-muted)]">
                         Don't have an account?{' '}
-                        <button type="button" onClick={onSwitchToRegister} className="font-medium text-[var(--secondary)] hover:text-[var(--accent)]">
+                        <Link to="/register" className="font-medium text-[var(--secondary)] hover:text-[var(--accent)]">
                             Register
-                        </button>
+                        </Link>
                     </p>
                 </div>
             </div>

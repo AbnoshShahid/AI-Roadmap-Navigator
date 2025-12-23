@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
 import Footer from './Footer';
 import { useAuth } from '../context/AuthContext';
 
-const DashboardLayout = ({ children, view, setView }) => {
+const DashboardLayout = () => {
     const { user } = useAuth();
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
+    const location = useLocation();
 
-    // Map view to title
+    // Map path to title
     const getTitle = () => {
-        switch (view) {
-            case 'roadmaps': return 'My Roadmaps';
-            case 'saved_roadmaps': return 'Saved Roadmaps';
-            case 'skills': return 'Progress Tracker';
-            case 'profile': return 'User Profile';
-            case 'form': return 'Create New Roadmap';
-            case 'roadmap': return 'Roadmap Details';
-            default: return 'Dashboard';
-        }
+        const path = location.pathname;
+        if (path.includes('/dashboard')) return 'Dashboard';
+        if (path.includes('/saved-roadmaps')) return 'My Roadmaps';
+        if (path.includes('/skills')) return 'Progress Tracker';
+        if (path.includes('/profile')) return 'User Profile';
+        if (path.includes('/create')) return 'Create New Roadmap';
+        if (path.includes('/templates')) return 'Explore Paths';
+        if (path.includes('/roadmap')) return 'Roadmap Details';
+        return 'Dashboard';
     };
 
     return (
         <div className="flex h-screen bg-[var(--bg-main)] font-sans">
             {/* 1. Fixed Sidebar */}
             <Sidebar
-                currentView={view}
-                onChangeView={setView}
                 isExpanded={isSidebarExpanded}
                 toggleSidebar={() => setIsSidebarExpanded(!isSidebarExpanded)}
             />
@@ -44,7 +44,7 @@ const DashboardLayout = ({ children, view, setView }) => {
                 {/* 4. Scrollable Content Area */}
                 <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 pt-20 px-6 pb-6 flex flex-col">
                     <div className="max-w-7xl mx-auto w-full flex-1">
-                        {children}
+                        <Outlet />
                     </div>
                 </main>
 

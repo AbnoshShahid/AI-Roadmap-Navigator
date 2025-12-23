@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
 // Components
 import Login from './components/Login';
 import Register from './components/Register';
-import Sidebar from './components/Sidebar';
 import CareerForm from './components/CareerForm';
 import RoadmapResult from './components/RoadmapResult';
 import RoadmapDashboard from './components/RoadmapDashboard';
@@ -16,30 +16,40 @@ import ProgressTracker from './components/ProgressTracker';
 import RoadmapTemplates from './components/RoadmapTemplates';
 import { generateRoadmap, saveRoadmap } from './services/api';
 
-const MainLayout = () => {
+// Protect Route Component
+const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
-  const [authView, setAuthView] = useState('login'); // 'login' or 'register'
-  const [view, setView] = useState('dashboard'); // 'dashboard', 'form', 'roadmap', 'skills', 'profile'
 
-  // Roadmap State
+  if (loading) return <div className="flex h-screen items-center justify-center text-gray-500">Loading...</div>;
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
+
+// Login/Register Wrapper for Redirects
+const PublicRoute = ({ children }) => {
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) return <div className="flex h-screen items-center justify-center text-gray-500">Loading...</div>;
+
+  if (isAuthenticated) {
+    return <Navigate to="/app/dashboard" replace />;
+  }
+
+  return children;
+};
+
+const AppRoutes = () => {
+  const navigate = useNavigate();
+  // Roadmap State (Lifted up for Roadmap generation flow)
   const [roadmap, setRoadmap] = useState(null);
   const [lastFormData, setLastFormData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [analysis, setAnalysis] = useState(null);
 
-  // Force view reset on logout is handled implicitly by unmounting
-
-  if (loading) {
-    return <div className="flex h-screen items-center justify-center text-gray-500">Loading...</div>;
-  }
-
-  if (!isAuthenticated) {
-    return authView === 'login'
-      ? <Login onSwitchToRegister={() => setAuthView('register')} />
-      : <Register onSwitchToLogin={() => setAuthView('login')} />;
-  }
-
-  // Authenticated Logic
   const handleFormSubmit = async (formData) => {
     setIsLoading(true);
     setLastFormData(formData);
@@ -55,7 +65,7 @@ const MainLayout = () => {
           skillsAnalysis: data.skillsAnalysis
         });
       }
-      setView('roadmap');
+      navigate('/app/roadmap/generated');
       toast.success('Roadmap generated successfully!');
     } catch (err) {
       console.error(err);
@@ -73,7 +83,7 @@ const MainLayout = () => {
         userSummary: {
           role: lastFormData.role,
           education: lastFormData.education,
-          currentSkills: lastFormData.skills.join(', '), // Convert array to string for legacy field
+          currentSkills: lastFormData.skills.join(', '),
           interests: lastFormData.interests
         },
         jobSuggestions: analysis.mlRecommendations?.map(rec => ({
@@ -81,21 +91,18 @@ const MainLayout = () => {
           description: `Confidence: ${(rec.confidence * 100).toFixed(0)}%`
         })) || [],
         skillsAnalysis: {
-          requiredSkills: [], // Not returned by backend yet, sending empty
+          requiredSkills: [],
           existingSkills: lastFormData.skills,
-          missingSkills: analysis.skillsAnalysis?.missingSkills?.map(s => s.skill) || [], // Extract skill names
+          missingSkills: analysis.skillsAnalysis?.missingSkills?.map(s => s.skill) || [],
           matchPercentage: analysis.skillsAnalysis?.matchScore || 0
         },
         roadmap
       });
       toast.success('Roadmap saved!', { id: toastId });
+      navigate('/app/saved-roadmaps');
     } catch (error) {
       console.error(error);
-      if (error.response && error.response.status === 503) {
-        toast('Roadmap generated, but could not save (DB offline).', { icon: '⚠️', id: toastId });
-      } else {
-        toast.error('Failed to save roadmap.', { id: toastId });
-      }
+      toast.error('Failed to save roadmap.', { id: toastId });
     }
   };
 
@@ -107,63 +114,79 @@ const MainLayout = () => {
       mlRecommendations: item.mlRecommendations,
       skillsAnalysis: item.skillsAnalysis
     });
-    setView('progress');
-  };
-
-  const renderContent = () => {
-    switch (view) {
-      case 'dashboard':
-        return <RoadmapDashboard onViewRoadmap={handleViewRoadmap} onCreateNew={() => setView('templates')} onlyActive={true} />;
-      case 'root':
-        return <RoadmapDashboard onViewRoadmap={handleViewRoadmap} onCreateNew={() => setView('templates')} onlyActive={true} />;
-      case 'saved_roadmaps':
-        return <RoadmapDashboard onViewRoadmap={handleViewRoadmap} onCreateNew={() => setView('templates')} onlyActive={false} />;
-      case 'templates':
-        return <RoadmapTemplates onTemplateAdded={() => setView('saved_roadmaps')} />;
-      case 'roadmaps':
-        // Legacy redirect
-        return <RoadmapDashboard onViewRoadmap={handleViewRoadmap} onCreateNew={() => setView('templates')} onlyActive={false} />;
-      case 'form':
-        return <CareerForm onSubmit={handleFormSubmit} isLoading={isLoading} />;
-      case 'progress':
-        return roadmap ? (
-          <ProgressTracker
-            roadmap={roadmap}
-            onBack={() => setView('saved_roadmaps')}
-          />
-        ) : <div className="text-center p-10">No roadmap loaded</div>;
-      case 'roadmap':
-        return roadmap ? (
-          <RoadmapResult
-            roadmap={roadmap}
-            analysis={analysis}
-            onReset={() => {
-              setRoadmap(null);
-              setAnalysis(null);
-              setView('form');
-            }}
-            onSave={handleSave}
-          />
-        ) : <div className="text-center p-10">No roadmap loaded</div>;
-      case 'skills':
-        return <SkillsDashboard />;
-      case 'profile':
-        return <Profile />;
-      default:
-        // Transactions fallback or undefined routes
-        return (
-          <div className="p-10 text-center">
-            <h2 className="text-2xl font-bold text-gray-300 mb-4">Coming Soon</h2>
-            <p className="text-gray-500">The <strong>{view}</strong> module is currently under development.</p>
-          </div>
-        );
-    }
+    navigate('/app/progress'); // Or specific ID if backend supports it
   };
 
   return (
-    <DashboardLayout view={view} setView={setView}>
-      {renderContent()}
-    </DashboardLayout>
+    <Routes>
+      <Route path="/login" element={
+        <PublicRoute>
+          <Login onSwitchToRegister={() => navigate('/register')} />
+        </PublicRoute>
+      } />
+      <Route path="/register" element={
+        <PublicRoute>
+          <Register onSwitchToLogin={() => navigate('/login')} />
+        </PublicRoute>
+      } />
+
+      {/* Protected App Routes */}
+      <Route path="/app" element={
+        <ProtectedRoute>
+          <DashboardLayout />
+        </ProtectedRoute>
+      }>
+        <Route path="dashboard" element={
+          <RoadmapDashboard
+            onViewRoadmap={handleViewRoadmap}
+            onCreateNew={() => navigate('/app/templates')}
+            onlyActive={true}
+          />
+        } />
+        <Route path="saved-roadmaps" element={
+          <RoadmapDashboard
+            onViewRoadmap={handleViewRoadmap}
+            onCreateNew={() => navigate('/app/templates')}
+            onlyActive={false}
+          />
+        } />
+        <Route path="templates" element={
+          <RoadmapTemplates onTemplateAdded={() => navigate('/app/saved-roadmaps')} />
+        } />
+        <Route path="create" element={
+          <CareerForm onSubmit={handleFormSubmit} isLoading={isLoading} />
+        } />
+        <Route path="skills" element={<SkillsDashboard />} />
+        <Route path="profile" element={<Profile />} />
+
+        {/* Result/Progress Views */}
+        <Route path="roadmap/generated" element={
+          roadmap ? (
+            <RoadmapResult
+              roadmap={roadmap}
+              analysis={analysis}
+              onReset={() => {
+                setRoadmap(null);
+                setAnalysis(null);
+                navigate('/app/create');
+              }}
+              onSave={handleSave}
+            />
+          ) : <Navigate to="/app/create" />
+        } />
+        <Route path="progress" element={
+          roadmap ? (
+            <ProgressTracker
+              roadmap={roadmap}
+              onBack={() => navigate('/app/saved-roadmaps')}
+            />
+          ) : <Navigate to="/app/saved-roadmaps" />
+        } />
+      </Route>
+
+      {/* Default Redirect */}
+      <Route path="*" element={<Navigate to="/app/dashboard" replace />} />
+    </Routes>
   );
 };
 
@@ -171,7 +194,7 @@ function App() {
   return (
     <AuthProvider>
       <Toaster position="top-right" />
-      <MainLayout />
+      <AppRoutes />
     </AuthProvider>
   );
 }

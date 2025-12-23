@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
     HomeIcon,
     PlusCircleIcon,
@@ -11,25 +12,27 @@ import {
     Squares2X2Icon
 } from '@heroicons/react/24/outline';
 
-const Sidebar = ({ currentView, onChangeView, isExpanded, toggleSidebar }) => {
+const Sidebar = ({ isExpanded, toggleSidebar }) => {
     const { logout } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    // Mapping User Features to App.jsx Views
-    // Dashboard -> "dashboard"
-    // Roadmaps -> "dashboard" (List of roadmaps)
-    // Saved Roadmaps -> "dashboard" (Also list)
-    // Progress -> "skills"
-    // Profile -> "profile"
-    // New Roadmap -> "form"
+    // Map paths to ID for active checking
+    const currentPath = location.pathname;
 
     const navItems = [
-        { id: 'dashboard', label: 'Dashboard', icon: Squares2X2Icon },
-        { id: 'saved_roadmaps', label: 'My Roadmaps', icon: BookmarkIcon },
-        { id: 'templates', label: 'Explore Paths', icon: GlobeAltIcon },
-        { id: 'form', label: 'Create New', icon: PlusCircleIcon },
-        { id: 'skills', label: 'Skills Matrix', icon: ChartBarIcon },
-        { id: 'profile', label: 'My Profile', icon: UserCircleIcon },
+        { id: 'dashboard', label: 'Dashboard', icon: Squares2X2Icon, path: '/app/dashboard' },
+        { id: 'saved_roadmaps', label: 'My Roadmaps', icon: BookmarkIcon, path: '/app/saved-roadmaps' },
+        { id: 'templates', label: 'Explore Paths', icon: GlobeAltIcon, path: '/app/templates' },
+        { id: 'form', label: 'Create New', icon: PlusCircleIcon, path: '/app/create' },
+        { id: 'skills', label: 'Skills Matrix', icon: ChartBarIcon, path: '/app/skills' },
+        { id: 'profile', label: 'My Profile', icon: UserCircleIcon, path: '/app/profile' },
     ];
+
+    const handleNavigation = (path) => {
+        navigate(path);
+        // On mobile (if we implement mobile later), we might want to close sidebar here
+    };
 
     return (
         <div
@@ -57,14 +60,13 @@ const Sidebar = ({ currentView, onChangeView, isExpanded, toggleSidebar }) => {
 
             {/* Navigation */}
             <nav className="flex-1 px-4 space-y-2 mt-4">
-                {menuItems.map((item) => {
-                    const targetView = item.view || item.id;
-                    const isActive = currentView === targetView;
+                {navItems.map((item) => {
+                    const isActive = currentPath === item.path;
 
                     return (
                         <button
                             key={item.id}
-                            onClick={() => onChangeView(targetView)}
+                            onClick={() => handleNavigation(item.path)}
                             className={`w-full flex items-center px-4 py-3 mb-1 transition-all duration-200 group relative
                                 ${isActive
                                     ? 'bg-[var(--sidebar-active-bg)] text-[var(--sidebar-text-active)]'
